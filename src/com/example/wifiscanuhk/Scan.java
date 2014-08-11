@@ -15,6 +15,14 @@ public class Scan {
 	private String MAC;
 	private int strenght;
 	
+	public Scan(int x, int y, String mAC, int strenght) {
+		super();
+		this.x = x;
+		this.y = y;
+		MAC = mAC;
+		this.strenght = strenght;
+	}
+	
 	public int getX() {
 		return x;
 	}
