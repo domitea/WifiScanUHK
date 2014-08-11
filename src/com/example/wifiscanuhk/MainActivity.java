@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
 		scans = new ArrayList<Scan>();
 		navigation = new HashMap<String, ArrayList<Scan>>();
 		
-		
+		Config.context = this;
 		WebView view = (WebView) findViewById(R.id.web);
         view.getSettings().setJavaScriptEnabled(true);
         view.addJavascriptInterface(new WebInterface(this), "Android");
@@ -35,6 +35,9 @@ public class MainActivity extends Activity {
         
         // nacitani dat pro urceni pozice
         prepareDataForNav();
+        
+        Finder finder = new Finder(navigation);
+        finder.getActualScan();
 	}
 
 	private void prepareDataForNav() {
