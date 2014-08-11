@@ -15,7 +15,6 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
 	ArrayList<Scan> scans;
-	ArrayList<String> macs;
 	
 	HashMap<String, ArrayList<Scan>> navigation;
 	
@@ -26,7 +25,6 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		scans = new ArrayList<Scan>();
-		macs = new ArrayList<String>();
 		navigation = new HashMap<String, ArrayList<Scan>>();
 		
 		
@@ -54,14 +52,6 @@ public class MainActivity extends Activity {
         	// 135;192;eduroam;00:1a:e3:d2:e7:20;2462;-73;	[WPA2-EAP-CCMP][ESS][P2P];	-0.785;	4.711;	9.557;	0;	0;	0;	-9.12;	-16.74;	-48.12
         	Scan scan = new Scan(Integer.parseInt(row[0]), Integer.parseInt(row[1]), row[3], Integer.parseInt(row[5]));
         	scans.add(scan);
-        	if (macs.contains(row[3])) // vytvoreni seznamu MAC a jejich poloh v poli -> index je vyuzit jako index...
-        	{
-        		// do nothing
-        	}
-        	else 
-        	{
-        		macs.add(row[3]);
-        	}
         }
         //Toast.makeText(getBaseContext(), String.valueOf(scans.size()), Toast.LENGTH_SHORT).show();
         //Toast.makeText(getBaseContext(), String.valueOf(macs.size()), Toast.LENGTH_SHORT).show(); // pocet vysilacich zarizeni (urcene podle MAC)

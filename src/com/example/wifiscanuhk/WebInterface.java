@@ -24,6 +24,8 @@ import android.widget.Toast;
 
 public class WebInterface {
 
+	// TODO: Refaktorovat!
+	
 	private Context c;
 	private int x,y;
 	private float accX, accY, accZ, gyroX, gyroY, gyroZ, magX, magY, magZ;
