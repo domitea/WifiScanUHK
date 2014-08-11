@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -14,6 +15,9 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
 	ArrayList<Scan> scans;
+	ArrayList<String> macs;
+	
+	HashMap<String, ArrayList<Scan>> navigation;
 	
 	
 	@Override
@@ -22,6 +26,9 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		scans = new ArrayList<Scan>();
+		macs = new ArrayList<String>();
+		navigation = new HashMap<String, ArrayList<Scan>>();
+		
 		
 		WebView view = (WebView) findViewById(R.id.web);
         view.getSettings().setJavaScriptEnabled(true);
@@ -45,10 +52,37 @@ public class MainActivity extends Activity {
         	//0; 1; 2;    3;          4;       5
         	// x;y;SSID;BSSID(MAC);Frekvence;sila; other stuff.... priklad nize
         	// 135;192;eduroam;00:1a:e3:d2:e7:20;2462;-73;	[WPA2-EAP-CCMP][ESS][P2P];	-0.785;	4.711;	9.557;	0;	0;	0;	-9.12;	-16.74;	-48.12
-        	scans.add(new Scan(Integer.parseInt(row[0]), Integer.parseInt(row[1]), row[3], Integer.parseInt(row[5])));
+        	Scan scan = new Scan(Integer.parseInt(row[0]), Integer.parseInt(row[1]), row[3], Integer.parseInt(row[5]));
+        	scans.add(scan);
+        	if (macs.contains(row[3])) // vytvoreni seznamu MAC a jejich poloh v poli -> index je vyuzit jako index...
+        	{
+        		// do nothing
+        	}
+        	else 
+        	{
+        		macs.add(row[3]);
+        	}
         }
         //Toast.makeText(getBaseContext(), String.valueOf(scans.size()), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getBaseContext(), String.valueOf(macs.size()), Toast.LENGTH_SHORT).show(); // pocet zarizeni
         
+       for (Scan s : scans)
+       {
+    	   String hashCoord = String.valueOf(s.getX()) + String.valueOf(s.getY());
+    	   if (navigation.containsKey(hashCoord))
+    	   {
+    		   ArrayList<Scan> scanCoords = navigation.get(hashCoord);
+    		   scanCoords.add(s);
+    	   }
+    	   else
+    	   {
+    		   ArrayList<Scan> scan = new ArrayList<Scan>();
+    		   scan.add(s);
+    		   navigation.put(hashCoord,scan);
+    	   }
+       }
+       
+     Toast.makeText(getBaseContext(), String.valueOf(navigation.size()), Toast.LENGTH_SHORT).show();
         
 	}
 
