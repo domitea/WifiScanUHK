@@ -64,7 +64,7 @@ public class MainActivity extends Activity {
         	}
         }
         //Toast.makeText(getBaseContext(), String.valueOf(scans.size()), Toast.LENGTH_SHORT).show();
-        //Toast.makeText(getBaseContext(), String.valueOf(macs.size()), Toast.LENGTH_SHORT).show(); // pocet zarizeni
+        //Toast.makeText(getBaseContext(), String.valueOf(macs.size()), Toast.LENGTH_SHORT).show(); // pocet vysilacich zarizeni (urcene podle MAC)
         
        for (Scan s : scans)
        {
@@ -82,7 +82,7 @@ public class MainActivity extends Activity {
     	   }
        }
        
-     Toast.makeText(getBaseContext(), String.valueOf(navigation.size()), Toast.LENGTH_SHORT).show();
+     //Toast.makeText(getBaseContext(), String.valueOf(navigation.size()), Toast.LENGTH_SHORT).show();
         
 	}
 
