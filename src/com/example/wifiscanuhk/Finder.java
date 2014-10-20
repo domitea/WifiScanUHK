@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
+import android.webkit.WebView;
 import android.widget.Toast;
 
 /**
@@ -29,11 +30,13 @@ public class Finder {
 	private List<ScanResult> scanResults;
 	private Context c;
 	private HashMap<Float, String> computedData;
+	private WebView view;
 	
-	public Finder(HashMap<String, ArrayList<Scan>> navigationData) {
+	public Finder(HashMap<String, ArrayList<Scan>> navigationData, WebView wv) {
 		this.navigationData = navigationData;
 		c = Config.context;
 		computedData = new HashMap<Float, String>();
+		view = wv;
 	}
 	
 	public void getActualScan()
@@ -106,7 +109,21 @@ public class Finder {
 		int x = navigationData.get(computedData.get(sortedKeys.get(0))).get(0).getX();
 		int y = navigationData.get(computedData.get(sortedKeys.get(0))).get(0).getY();
 		
-		Toast.makeText(c, "Position is: " + String.valueOf(x) + " " + String.valueOf(y), Toast.LENGTH_SHORT).show();
+		//Toast.makeText(c, "Position is: " + String.valueOf(x) + " " + String.valueOf(y), Toast.LENGTH_SHORT).show();
+		
+		//view.loadUrl("javascript:alert(" + " \" " + String.valueOf(x) + " " + String.valueOf(y)  + " \" " + " )");
+		view.loadUrl("javascript:  var svgns = \"http://www.w3.org/2000/svg\"; " +
+				" 						function makeShape(x,y)	{" +
+				"							var svg = document.getElementsByTagName(\"svg\")[0];" +
+				"							var shape = document.createElementNS(svgns, \"circle\");" +
+				"							shape.setAttributeNS(svgns, \"cx\", x);	" +
+				"							shape.setAttributeNS(svgns, \"cy\", y);	" +
+				"							shape.setAttributeNS(svgns, \"r\", 25);	" +
+				"							shape.setAttributeNS(svgns, \"fill\", \"green\");	" +
+				"							" +
+				"							svg.appendChild(shape); }" +
+				"" +
+				"	makeShape(25,25);						" );
 		
 		
 	}

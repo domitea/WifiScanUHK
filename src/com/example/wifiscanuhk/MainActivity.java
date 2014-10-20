@@ -9,6 +9,7 @@ import java.util.HashMap;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.Toast;
 
@@ -30,13 +31,16 @@ public class MainActivity extends Activity {
 		Config.context = this;
 		WebView view = (WebView) findViewById(R.id.web);
         view.getSettings().setJavaScriptEnabled(true);
+        view.setWebChromeClient(new WebChromeClient());
         view.addJavascriptInterface(new WebInterface(this), "Android");
         view.loadData(readTextFromResource(R.drawable.uhk_2_patro), "application/svg+xml", "UTF-8");
         
         // nacitani dat pro urceni pozice
         prepareDataForNav();
         
-        Finder finder = new Finder(navigation);
+        //view.loadUrl("javascript:alert(" + " \" " + "Nazdarek!" + " \" " + ")");
+        
+        Finder finder = new Finder(navigation, view);
         finder.getActualScan();
 	}
 
