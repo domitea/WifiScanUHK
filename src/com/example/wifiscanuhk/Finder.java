@@ -82,6 +82,7 @@ public class Finder {
 		 * 
 		 */
 		
+		// nekde tady je schvana jedna potvora, myslim, ze Chyba je jeji jmeno.... 
 		float distance = 0;
 		
 		for (ArrayList<Scan> listOfScans : navigationData.values()) // prochazime fond skenu
@@ -101,6 +102,7 @@ public class Finder {
 				}
 			}
 			computedData.put((float) Math.sqrt(distance), String.valueOf(listOfScans.get(1).getX()) + String.valueOf(listOfScans.get(1).getY()));
+			distance = 0;
 		}
 		
 		ArrayList<Float> sortedKeys = new ArrayList<Float>(computedData.keySet());
@@ -112,7 +114,7 @@ public class Finder {
 		//Toast.makeText(c, "Position is: " + String.valueOf(x) + " " + String.valueOf(y), Toast.LENGTH_SHORT).show();
 		
 		//view.loadUrl("javascript:alert(" + " \" " + String.valueOf(x) + " " + String.valueOf(y)  + " \" " + " )");
-		view.loadUrl("javascript:  var svgns = \"http://www.w3.org/2000/svg\"; " +
+		/*view.loadUrl("javascript:  var svgns = \"http://www.w3.org/tr/svg\"; " +
 				" 						function makeShape(x,y)	{" +
 				"							var svg = document.getElementsByTagName(\"svg\")[0];" +
 				"							var shape = document.createElementNS(svgns, \"circle\");" +
@@ -123,8 +125,8 @@ public class Finder {
 				"							" +
 				"							svg.appendChild(shape); }" +
 				"" +
-				"	makeShape(25,25);						" );
-		
+				"	makeShape(25,25);						" );*/
+		view.loadUrl("javascript:setPoint(" + String.valueOf(x) + "," + String.valueOf(y) + ")");
 		
 	}
 }

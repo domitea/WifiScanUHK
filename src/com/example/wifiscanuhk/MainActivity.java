@@ -47,7 +47,7 @@ public class MainActivity extends Activity {
 	private void prepareDataForNav() {
 		
 		
-		String data = readTextFromResource(R.drawable.data3patro);
+		String data = readTextFromResource(R.drawable.data);
         //Toast.makeText(getBaseContext(),String.valueOf(data.indexOf('\n')), Toast.LENGTH_SHORT).show();
         String[] dataScanInRawRows = data.split("\n");
         //Toast.makeText(getBaseContext(), String.valueOf(dataScanInRawRows.length), Toast.LENGTH_SHORT).show();
